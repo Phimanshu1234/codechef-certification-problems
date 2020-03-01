@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+lld find(lld x,lld a[])
+{
+    if(x==a[x])
+    {
+        return x;
+    }
+    else
+    {
+        a[x]=find(a[x],a);
+        return a[x];
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,n,c;
+    cin>>t;
+    while(t--)
+    {
+        lld i,y,z,a1,b1;
+        cin>>n>>c;
+        lld a[n+1],b[n+1];
+        for(i=1;i<=n;i++)
+        {
+            a[i]=i;
+        }
+        for(i=1;i<=n;i++)
+        {
+            b[i]=1;
+        }
+        for(i=1;i<=c;i++)
+        {
+            cin>>a1>>b1;
+            lld z1=find(a1,a);
+            lld z2=find(b1,a);
+            if(z1!=z2)
+            {
+                 if(b[z1]>b[z2])
+                 {
+                     b[z1]=b[z1]+b[z2];
+                     b[z2]=0;
+                     a[z2]=z1;
+                 }
+                 else
+                 {
+                     b[z2]=b[z1]+b[z2];
+                     b[z1]=0;
+                     a[z1]=z2;
+                 }
+            }
+            
+        }
+        lld zz=1,M=1000000007,sum=0;
+        for(i=1;i<=n;i++)
+        {
+            if(b[i]!=0)
+            {
+                zz=(zz%M*b[i]%M)%M;
+                sum++;
+            }
+        }
+        cout<<sum<<" "<<zz<<"\n";
+    }
+    return 0;
+}
