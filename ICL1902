@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include<math.h>
+int main()
+{
+    int n,t,count,r,p;
+    scanf("%d",&t);
+    while(t--)
+    {
+        count=0;
+        scanf("%d",&n);
+        while(n>0)
+        {
+            p=sqrt(n);
+            r=(n-p*p);
+            count++;
+            n=r;
+        }
+        printf("%d\n",count);
+    }
+    return 0;
+}
+
