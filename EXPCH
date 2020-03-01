@@ -1,0 +1,162 @@
+#include<stdio.h>
+#define lld long long int
+#define mod 1000000007
+#define MAX_LIMIT 10000001
+lld gcdExtended( lld a,lld b,lld *x,lld *y); 
+lld modInverse(lld a,lld m) 
+{ 
+    lld x, y; 
+     gcdExtended(a, m, &x, &y); 
+        int res = (x%m + m) % m; 
+        return res;
+} 
+lld gcdExtended(lld a,lld b,lld *x,lld *y) 
+{ 
+    if (a == 0) 
+    { 
+        *x = 0, *y = 1; 
+        return b; 
+    } 
+  
+    lld x1, y1; 
+    lld gcd = gcdExtended(b%a, a, &x1, &y1); 
+    *x = y1 - (b/a) * x1; 
+    *y = x1; 
+  
+    return gcd; 
+} 
+lld gcd(lld a, lld b) 
+{ 
+    if (b == 0) 
+        return a; 
+    return gcd(b, a % b);  
+      
+}
+lld powerpoint(lld a,lld b1,lld m) 
+{
+     a%=m;
+     lld res1=1;
+    while(b1>0)
+    {
+        if (b1&1)res1=res1* a % m;
+        a=a*a % m;
+        b1>>=1;
+    }
+    return res1;
+}
+lld pandeymodinverse(lld a, lld m) 
+{ 
+    lld g = gcd(a, m); 
+    if (g != 1) 
+        return -1;
+    else
+    { 
+    return powerpoint(a,m-2,m)%m; 
+    } 
+} 
+int main()
+{
+    lld t;
+    scanf("%lld",&t);
+    while(t--)
+    {
+        lld n;
+        scanf("%lld",&n);
+        char s[10000001]; 
+           scanf("%s",s); 
+        if(n<=5000)
+        {
+            lld ans2=0;
+        for(lld i=0;i<n;i++)
+        {   lld count1=0,count2=0,ans=0;;
+            for(lld j=i;j<n;j++)
+            {
+                if(s[j]=='(')
+                {
+                    count1++;
+                }
+                if(s[j]==')')
+                {
+                    count2++;
+                }
+                if(count2-count1-2*ans>0)
+                {
+                    ans++;
+                    ans2+=ans;
+                }
+                else
+                {
+                    ans2+=ans;
+                }
+            }
+            //ans2+=ans;
+        }
+        //cout<<ans2<<"\n";
+        lld p=modInverse((n*(n+1))/2,1000000007);
+        printf("%lld\n",((ans2%1000000007)*p%1000000007)%1000000007); 
+        }
+        else
+        {
+        lld closebraket=0;
+        lld a[n+1],i;
+        for(i=0;i<n;i++)
+        {
+            a[i]=0;
+        }
+        lld himanshu[10000000];
+        lld resultant[n+1];
+        for(i=0;i<n;i++)
+        {
+            resultant[i]=0;
+        }
+        lld somuchextraflip=0;
+        for(lld k=0;k<10000000;k++)
+            himanshu[k]=mod;
+        for(lld i=n-1;i>=0;i--)
+        {
+            if(s[i]=='(')
+                closebraket--;
+            if(s[i]==')')
+                closebraket++;
+            a[i]=closebraket;
+            
+             if(s[i]=='(')
+            {
+                somuchextraflip=a[i];
+                if(somuchextraflip<0)
+                    somuchextraflip+=10000000;
+                if(himanshu[somuchextraflip]!=mod)
+                    resultant[i]=resultant[i]+resultant[himanshu[somuchextraflip]];
+            }
+            else if(s[i]==')')
+            {
+                somuchextraflip=a[i]-2;
+                resultant[i]=n-i;
+                if(somuchextraflip<0)
+                    somuchextraflip+=10000000;
+            }
+            else
+             resultant[i]=resultant[i+1];
+         if(s[i]==')')
+            {
+                if(himanshu[somuchextraflip]!=mod)
+                    resultant[i]=resultant[i]+resultant[himanshu[somuchextraflip]];
+                somuchextraflip=closebraket;
+                if(closebraket<0)
+                    somuchextraflip+=10000000;
+                himanshu[somuchextraflip]=i;
+            }
+
+        }   
+        lld answer=0;
+        for(lld i=0;i<n;i++)
+        {
+            answer=(answer+resultant[i])%mod;
+        }
+        lld x1=n*(n+1)/2;
+        lld ya=(answer*pandeymodinverse(x1,mod));
+        printf("%lld\n",ya%mod);
+    }
+    }
+    return 0;
+}
