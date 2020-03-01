@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int t,n,i,m,s,count;
+    float k;
+    string str;
+    cin>>t;
+    while(t--)
+    {m=0;
+      count=0;
+        cin>>n;
+        cin>>str;
+         k=ceil(0.75*n);
+        for(i=0;i<n;i++)
+        {
+            if(str[i]=='P')
+            {
+                m++;
+            }
+        }
+        s=k-m;
+        if(s<=0)
+        {
+            cout<<0<<endl;
+        }
+        else
+        {
+            for(i=2;i<n-2;i++)
+            {
+                if(str[i]=='A'&&(str[i-1]=='P'||str[i-2]=='P')&&(str[i+1]=='P'||str[i+2]=='P'))
+                {
+                    count++;
+                    if(count==s)
+                    {
+                        cout<<count<<endl;
+                        break;
+                    }
+                }
+            }
+            if(count<s)
+            {
+                cout<<-1<<endl;
+            }
+        }
+    }
+    return 0;
+}
