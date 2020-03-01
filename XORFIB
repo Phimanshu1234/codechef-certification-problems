@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+#define speed ios_base::sync_with_stdio(0); cin.tie(0);cout.tie(0);
+#define M 1000000007
+int main()
+{
+    speed
+    lld t,n,m,x,y,k,k1,x1,i;
+    cin>>t;
+    while(t--)
+    {
+    cin>>n>>m;
+    lld a[1000001];
+    cin>>x>>y;
+    a[0]=x;
+    a[1]=y;
+      k=x^y;
+     for(i=0;i<m-2;i++)
+     {
+         cin>>x1;
+         k=k^x1;
+         a[i+2]=x1;
+     }
+     a[m]=k;
+     cout<<a[n%(m+1)]<<"\n";
+    }
+    return 0;
+}
