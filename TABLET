@@ -1,0 +1,41 @@
+#include <stdio.h>
+int main()
+{
+  int t,n,i;
+  long long int b,w,h,k,r,p,r1,temp;
+  scanf("%d",&t);
+  while(t--)
+  {r1=0;
+      k=0;
+      scanf("%d%lld",&n,&b);
+      for(i=1;i<=n;i++)
+      {
+          scanf("%lld%lld%lld",&w,&h,&p);
+          if(p>b)
+          {
+              k++;
+          }
+          else
+          {
+             r=w*h;
+             if(r>r1)
+             {
+                 temp=r1;
+                 r1=r;
+                 r=temp;
+             }
+          }
+      }
+      if(k==n)
+      {
+          printf("no tablet\n");
+      }
+      else
+      {
+          printf("%lld\n",r1);
+      }
+  }
+  return 0;
+}
+
+
