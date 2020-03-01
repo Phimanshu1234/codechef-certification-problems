@@ -1,0 +1,62 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+#define MOD 1000000007
+  
+#define lld long long int 
+  
+lld power(lld n,lld k1,lld k2) 
+{ 
+    if (n <= 1) 
+        return 1; 
+  
+    n--; 
+  
+    lld res[2][2] = { 1,0,0,1 }; 
+  
+    lld tMat[2][2] = { 3,4,1,0 }; 
+  
+    while (n) { 
+  
+        if (n & 1) { 
+            lld tmp[2][2]; 
+            tmp[0][0] = (res[0][0] * tMat[0][0] + res[0][1] * tMat[1][0]) % MOD; 
+            tmp[0][1] = (res[0][0] * tMat[0][1] + res[0][1] * tMat[1][1]) % MOD; 
+            tmp[1][0] = (res[1][0] * tMat[0][0] + res[1][1] * tMat[1][0]) % MOD; 
+            tmp[1][1] = (res[1][0] * tMat[0][1] + res[1][1] * tMat[1][1]) % MOD; 
+            res[0][0] = tmp[0][0]; 
+            res[0][1] = tmp[0][1]; 
+            res[1][0] = tmp[1][0]; 
+            res[1][1] = tmp[1][1]; 
+        } 
+        n = n / 2; 
+        lld tmp[2][2]; 
+        tmp[0][0] = (tMat[0][0] * tMat[0][0] + tMat[0][1] * tMat[1][0]) % MOD; 
+        tmp[0][1] = (tMat[0][0] * tMat[0][1] + tMat[0][1] * tMat[1][1]) % MOD; 
+        tmp[1][0] = (tMat[1][0] * tMat[0][0] + tMat[1][1] * tMat[1][0]) % MOD; 
+        tmp[1][1] = (tMat[1][0] * tMat[0][1] + tMat[1][1] * tMat[1][1]) % MOD; 
+        tMat[0][0] = tmp[0][0]; 
+        tMat[0][1] = tmp[0][1]; 
+        tMat[1][0] = tmp[1][0]; 
+        tMat[1][1] = tmp[1][1]; 
+    } 
+    return ((res[0][0]* k2)%MOD+(res[0][1]*k1)%MOD)%MOD; 
+} 
+int main() 
+{ 
+    lld n ,k1,k2;
+    cin>>n;
+    cin>>k1>>k2;
+    if(n==1)
+    {
+        cout<<k1;
+    }
+    else if(n==2)
+    {
+        cout<<k2;
+    }
+    else
+    {
+    cout<<power(n-1,k1,k2); 
+    }
+    return 0; 
+} 
