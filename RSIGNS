@@ -1,0 +1,11 @@
+import math
+t=int(input());
+while(t>0):
+    
+    n=int(input());
+    p=pow(2,n-1,1000000007);
+    p=p*10;
+    p=p%1000000007;
+    print(p);
+    t=t-1;
+         
