@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int n,i,j,count,b,sum;
+    while(1)
+    {
+        cin>>n;
+        vector<long long int>a;
+        if(n==0)
+        {
+            break;
+        }
+        else
+        {
+            for(i=0;i<n;i++)
+            {
+                cin>>b;
+                a.push_back(b);
+            }
+            sum=0;
+            sort(a.begin(),a.end());
+            for(i=0;i<n-2;i++)
+            {
+                for(j=i+1;j<n-1;j++)
+                {
+                    count=a[i]+a[j];
+                    auto it=upper_bound(a.begin()+j+1,a.end(),count);
+                    sum+=a.end()-it;
+                }
+            }
+            cout<<sum<<endl;
+        }
+    }
+    return 0;
+}
