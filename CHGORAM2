@@ -1,0 +1,134 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+#define lld long long int
+void add_edge(vector<lld>adj[], lld src, lld dest) 
+{ 
+    adj[src].push_back(dest); 
+    adj[dest].push_back(src); 
+} 
+bool BFS(vector<lld> adj[], lld src, lld dest, lld v, 
+                            lld pred[], lld dist[]) 
+{
+    list<lld> queue; 
+  
+    bool visited[v+1]; 
+  
+    for (lld i=1;i<v+1;i++)
+    { 
+        visited[i]=false; 
+        dist[i]=INT_MAX; 
+        pred[i]=-1; 
+    } 
+  
+    visited[src]=true; 
+    dist[src]=0; 
+    queue.push_back(src); 
+
+    while (!queue.empty()) 
+    { 
+        lld u = queue.front(); 
+        queue.pop_front(); 
+        for (lld i = 0; i < adj[u].size(); i++) 
+        { 
+            if (visited[adj[u][i]] == false) 
+            { 
+                visited[adj[u][i]] = true; 
+                dist[adj[u][i]]= dist[u] + 1; 
+                pred[adj[u][i]] = u; 
+                queue.push_back(adj[u][i]); 
+ 
+                if (adj[u][i] == dest) 
+                   return true; 
+            } 
+        } 
+    } 
+  
+    return false; 
+} 
+  
+lld prlldShortestDistance(vector<lld> adj[], lld s,  
+                                    lld dest, lld v) 
+{ 
+    lld pred[v+1], dist[v+1]; 
+  
+    BFS(adj, s, dest, v, pred, dist);
+    vector<lld>path; 
+    lld crawl = dest; 
+    path.push_back(crawl); 
+    while (pred[crawl]!=-1)
+    { 
+        path.push_back(pred[crawl]); 
+        crawl = pred[crawl]; 
+    } 
+        return dist[dest]; 
+} 
+int main() 
+{ 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld n,i,x,y,j,k;
+       cin>>n;
+       vector<lld>adj[1001]; 
+    for(i=0;i<n-1;i++)
+    {
+        cin>>x>>y;
+       add_edge(adj,x,y); 
+    }
+    lld a[n+2],b[n+2][n+2];
+    for(i=1;i<=n;i++)
+    {
+        cin>>a[i];
+    }
+    for(i=1;i<=n;i++)
+    {
+    for(j=1;j<=n;j++)
+    {
+        if(a[i]==1&&a[j]==1&&i!=j)
+        {
+         b[i][j]=prlldShortestDistance(adj,i,j,n);
+        }
+        else
+        {
+            b[i][j]=0;
+        }
+    }
+    }
+    lld count=0,ss=500;
+    for(i=1;i<=min(ss,n);i++)
+    {
+        if(a[i]==1)
+        {
+    for(j=1;j<=min(ss,n);j++)
+    {
+        if(a[j]==1)
+        {
+        for(k=1;k<=min(ss,n);k++)
+        {
+            if(a[k]==1)
+            {
+            if(i!=j&&i!=k&&j!=k)
+            {
+              lld s1=b[i][j];
+              lld s2=b[i][k];
+              lld s3=b[j][k];
+            
+              if(s1==s2&&s1==s3&&s2==s3)
+              {
+                  count++;
+              }
+            }
+            }
+        }
+        }
+    }
+        }
+    }
+    cout<<count<<"\n";
+    }
+    return 0; 
+} 
