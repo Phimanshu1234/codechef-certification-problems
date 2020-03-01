@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+struct people 
+{
+    lld a,b,c;
+};
+struct compare
+{
+    bool operator()(const people & s1,const people & s2)
+    {
+        if(s1.a!=s2.a)
+        return s1.a>s2.a;
+        else
+        {
+            return s1.c<s2.c;
+        }
+    }
+};
+struct compare2
+{
+    bool operator()(const people & s3,const people & s4)
+    {
+        return s3.c<s4.c;
+    }
+};
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,i,n,d,sum;
+    cin>>t;
+    while(t--)
+    {sum=0;
+        priority_queue<people,vector<people>,compare>p;
+        priority_queue<people,vector<people>,compare2>q;
+        cin>>n>>d;
+        people s[n+1];
+        for(i=0;i<n;i++)
+        {
+            cin>>s[i].a>>s[i].b>>s[i].c;
+            p.push(s[i]);
+        }
+         for(i=1;i<=d;i++)
+         {
+             people k=p.top();
+             while(!p.empty()&&i>=k.a)
+             {
+                 people r=p.top();
+                 q.push(r);
+                 p.pop();
+                 k=p.top();
+             }
+             if(!q.empty())
+             {
+                 people r2=q.top();
+                 r2.b=r2.b-1;
+                 q.pop();
+                 if(r2.b>0)
+                 {
+                     q.push(r2);
+                 }
+             }
+         }
+        while(!q.empty())
+        {
+             people p2=q.top();
+            sum+=(p2.c)*(p2.b);
+            q.pop();
+        }
+        while(!p.empty())
+        {
+            people p3=p.top();
+            sum+=(p3.c)*(p3.b);
+            p.pop();
+        }
+        cout<<sum<<"\n";
+    }
+    return 0;
+}
