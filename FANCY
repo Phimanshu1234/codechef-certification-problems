@@ -1,0 +1,8 @@
+t=int(input())
+while(t>0):
+    S= input().split()
+    if('not' in S):
+       print("Real Fancy")
+    else:
+       print("regularly fancy")
+    t=t-1
