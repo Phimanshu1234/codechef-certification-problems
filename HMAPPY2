@@ -1,0 +1,31 @@
+
+
+#include<stdio.h>
+long long int gcd(long long int a,long long int b)
+{if(b!=0)
+   {
+	return gcd(b,a%b);
+	}
+	else
+	return a;
+}
+int main()
+{
+ int t;
+ long long int n,a,b,k,p,count;
+ scanf("%d\n",&t);
+ while(t--)
+ {
+  scanf(" %lld %lld %lld %lld\n ",&n,&a,&b,&k);
+  p=(a/gcd(a,b))*b;
+  count=(n/a+n/b-2*(n/p));
+   if(count>=k)
+   {
+   	printf("Win\n");
+   }
+   else
+   printf("Lose\n");
+ }
+ return 0;
+}
+    
