@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        lld b[n+1];
+        lld m=pow(2,n);
+        lld i,x,j;
+        multiset<lld>ms;
+        vector<lld>v;
+        for(i=0;i<m;i++)
+        {
+            cin>>x;
+            if(x!=0)
+            {
+                ms.insert(x);
+            }
+        }
+        /*for(itr=ms.begin();itr!=ms.end();itr++)
+        {
+            cout<<*itr<<" ";
+        }*/
+         for(i=0;i<n;i++)
+        {
+             auto itr=ms.begin();
+            b[i]=*itr;
+            //ms.erase(ms.find(b[i]));
+            v.push_back(b[i]);
+            auto ktr=ms.find(b[i]);
+            ms.erase(ktr);
+            lld k=v.size()-1;
+            for(j=0;j<k;j++)
+            {
+                //ms.erase(ms.find(b[i]+v[j]));
+                v.push_back(b[i]+v[j]);
+                auto ptr=ms.find(b[i]+v[j]);
+                  ms.erase(ptr);
+            }
+        }
+        for(i=0;i<n;i++)
+        {
+            cout<<b[i]<<" ";
+        }
+        cout<<"\n";
+    }
+    return 0;
+}
