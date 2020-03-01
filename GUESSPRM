@@ -1,0 +1,102 @@
+#include<bits/stdc++.h>
+#define lld long long int
+using namespace std;
+void prime(vector<lld>&vec,lld n) 
+{ 
+    if(n%2==0)
+    {
+        vec.push_back(2);
+     while (n % 2 == 0) 
+    { 
+      n = n/2; 
+    }
+    }
+for (lld i = 3; i <= sqrt(n); i = i + 2) 
+{ 
+if(n%i==0) 
+{
+   vec.push_back(i);
+while (n % i == 0) 
+{ 
+
+n = n/i; 
+} 
+}
+} 
+
+if (n >2) 
+vec.push_back(n);
+}
+
+
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    
+long long int t;
+cin>>t;
+while(t--)
+{
+    lld m1,m2;
+    vector<lld>vec1;
+    cout<<1<<" "<<31828<<endl;
+      cin>>m1;
+      if(m1==-1)
+      {
+          break;
+      }
+     prime(vec1,31828*31828-m1);
+     string s;
+    if(vec1.size()==1&&vec1[0]>m1)
+    {
+    cout<<2<<" "<<vec1[0]<<endl;
+    cin>>s;
+    if(s=="Yes")
+    continue;
+    else
+    return 1;
+    }
+    else
+    {
+        vector<lld>vec2;
+       cout<<1<<" "<<31628<<endl;
+          cin>>m2;
+          if(m2==-1)
+          {
+              break;
+          }
+       prime(vec2,31628*31628-m2);
+       for(lld i=0;i<vec1.size();i++)
+       {
+          long long int flag=0;
+           for(lld j=0;j<vec2.size();j++)
+           {
+               if(vec1[i]==vec2[j]&&vec1[i]>max(m1,m2))
+               {
+                   cout<<2<<" "<<vec1[i]<<endl;
+                   string st;
+                   cin>>st;
+                   if(st=="Yes")
+                   {
+                       flag=1;
+                       break;
+                   }
+                   else
+                   {
+                   return 2;
+                   }
+               }
+           }
+           if(flag==1)
+           {
+              break;
+           }
+       }
+       
+    }
+    cout<<endl;
+}
+return 0;
+}
