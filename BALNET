@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld n,m,i,j,k,f=0,x,y;
+        cin>>n>>m;
+        vector<pair<lld,lld>>v;
+        for(i=0;i<m;i++)
+        {
+            cin>>x>>y;
+            v.push_back(make_pair(x,y));
+        }
+          
+        for(i=0;i<pow(2,m);i++)
+        {
+            set<lld>s;
+            for(j=1;j<=n;j++)
+            {
+                lld reach=j;
+                for(k=m-1;k>=0;k--)
+                {
+                    if((1<<k)&i)
+                    {
+                        if(reach==v[m-k-1].first)
+                        {
+                            reach=v[m-k-1].second;
+                        }
+                    }
+                    else
+                    {
+                        if(reach==v[m-k-1].second)
+                        {
+                         reach=v[m-k-1].first;
+                        }
+                    }
+                }
+                s.insert(reach);
+            }
+            if(s.size()>=ceil((double)n/2))
+            {
+                f=1;
+                for(lld k1=m-1;k1>=0;k1--)
+                {
+                    if((1<<k1)&i)
+                    {
+                        cout<<"v";
+                    }
+                    else
+                    {
+                        cout<<"^";
+                    }
+                }
+                cout<<"\n";
+                break;
+            }
+        }
+        if(f==0)
+        {
+            cout<<"failure"<<"\n";
+        }
+    }
+    return 0;
+}
