@@ -1,0 +1,22 @@
+#include<stdio.h>
+int main()
+{
+ long long int t,N,i,a[100000],sum,sum2;
+ scanf("%lld\n",&t);
+ while(t--)
+ {
+  scanf("%lld\n",&N);
+  for(i=0;i<N;i++)
+  {
+   scanf("%lld",&a[i]);
+  }
+  sum=0;
+  for(i=0;i<N;i++)
+  {
+  	sum=sum+a[i];
+  }
+ sum2=(sum-(N-1));
+ printf ("%lld\n",sum2);
+ }
+return 0;
+}
