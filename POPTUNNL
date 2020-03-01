@@ -1,0 +1,72 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+lld bfs(lld r,lld level[],vector<vector<lld>>&v,lld visited[ ])
+{
+    queue<lld>q;
+    q.push(r);
+    visited[0]=1;
+    while(!q.empty())
+    {
+        lld z=q.front();
+             q.pop();
+        for(lld i=0;i<v[z].size();i++)
+        {
+            if(visited[v[z][i]]==0)
+            {
+             q.push(v[z][i]);visited[v[z][i]]=1;
+            if(level[v[z][i]]==0)
+            {
+              level[v[z][i]]=level[z]+1;
+            }
+            else
+            {
+                level[v[z][i]]=min(level[v[z][i]],1+level[z]);
+            }
+            }
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld n,k,i,j;
+        string s[1001];
+        cin>>n>>k;
+         vector<vector<lld>>v(n);
+        lld level[1001],visited[1001];
+        for(i=0;i<=n;i++)
+        {
+            level[i]=0;
+            visited[i]=0;
+        }
+        for(i=0;i<n;i++)
+        {
+            cin>>s[i];
+            for(j=0;j<n;j++)
+            {
+                lld p=0;
+                if(s[i][j]=='1'&&i!=j&&j>=max(p,i-k)&&j<=min(n-1,i+k))
+                {
+                    v[i].push_back(j);
+                }
+            }
+        }
+        bfs(0,level,v,visited);
+        if(level[n-1]!=0)
+        {
+            cout<<level[n-1]<<"\n";
+        }
+        else
+        {
+            cout<<-1<<"\n";
+        }
+    }
+    return 0;
+}
