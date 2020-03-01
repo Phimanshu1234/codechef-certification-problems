@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include<math.h>
+int main()
+{
+    int t,n,m,i;
+   long double a,b,c,d,e,f;
+    scanf("%d",&t);
+    while(t--)
+    {a=0,b=0,c=0;
+        scanf("%d",&m);
+        n=m-1;;
+        for(i=0;i<=60;i++)
+        {
+           if(n>=26*i&&n<26*i+2) 
+           {
+               a=pow(2,i);
+               printf("%.Lf 0 0\n",a);
+               break;
+           }
+           if(n>=26*i+2&&n<26*i+10)
+           {
+               b=pow(2,i);
+               printf("0 %.Lf 0\n",b);
+               break;
+           }
+           if(n>=26*i+10&&n<26*i+26)
+           {
+               c=pow(2,i);
+               printf("0 0 %.Lf\n",c);
+               break;
+          }
+          if(n>=1586&&n<1588)
+          {
+             d=2*1152921504606846976;
+             printf("%.Lf 0 0\n",d);
+             break;
+          }
+          if(n>=1588&&n<1596)
+          {
+              e=2*1152921504606846976;
+              printf("0 %.Lf 0\n",e);
+              break;
+          }
+          if(n>=1596&&n<1600)
+          {
+              f=2*1152921504606846976;
+              printf("0 0 %.Lf\n",f);
+              break;
+          }
+        }
+    }
+    return 0;
+}
+
