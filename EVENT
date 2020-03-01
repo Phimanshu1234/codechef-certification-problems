@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() 
+{
+    int t,l,r,i,count;
+    cin>>t;
+    while(t--)
+    {count=0;
+     char a[10],b[10];
+     int x,y,p,p1;
+    cin>>a>>b;
+    cin>>l>>r;
+     if(strcmp(a,"monday")==0)
+     x=1;
+     else if(strcmp(a,"tuesday")==0)
+     x=2;
+     else if(strcmp(a,"wednesday")==0)
+     x=3;
+     else if(strcmp(a,"thursday")==0)
+     x=4;
+     else if(strcmp(a,"friday")==0)
+     x=5;
+     else if(strcmp(a,"saturday")==0)
+     x=6;
+     else if(strcmp(a,"sunday")==0)
+     x=7;
+     if(strcmp(b,"monday")==0)
+     y=1;
+     else if(strcmp(b,"tuesday")==0)
+     y=2;
+     else if(strcmp(b,"wednesday")==0)
+     y=3;
+     else if(strcmp(b,"thursday")==0)
+     y=4;
+     else if(strcmp(b,"friday")==0)
+     y=5;
+     else if(strcmp(b,"saturday")==0)
+     y=6;
+     else if(strcmp(b,"sunday")==0)
+     y=7;
+     if(x>y)
+     {
+         y=y+7;
+     }
+      for(i=y-x+1;i<=r;i=i+7)
+      {
+         if(i>=l&&i<=r)
+          {
+          count++;
+          p1=i;
+          }
+      }
+      if(count==0)
+      {
+         cout<<"impossible\n";
+      }
+      else if(count==1)
+      {
+          cout<<p1<<endl;
+      }
+      else
+      {
+          cout<<"many\n";
+      }
+    }
+    return 0;
+}
