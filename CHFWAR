@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long int d=0;
+struct wa
+{
+    long long int a,b;
+};
+bool f3(wa s1,wa s2)
+{
+    if(s1.a==s2.a)
+    return s1.b<s2.b;
+    else
+    {
+    return s1.a<s2.a;
+    }
+}
+void f1(vector<long long int>v)
+{
+    if(v.size()>2)
+    {
+        for(long long int i=0;i<v.size();i+=2)
+        {
+            if(v[(i+1)%v.size()]==0)
+            {
+              d=d+v[i]; 
+            }
+            else if(v[i]==0)
+            i--;
+            else
+            {
+                v[(i+1)%v.size()]=-10;
+            }
+        }
+        long long int k=v.size();
+        for(int i=0;i<k;i++)
+        {
+            if(v[i]==-10)
+            {
+                auto it=(v.begin()+i);
+                  v.erase(it);
+                  //v.shrink_to_fit();
+                  k--;
+                  i--;
+            }
+        }
+         f1(v);
+    }
+}
+void f2(vector<long long int>a,long long int i)
+{
+    a.insert(a.begin()+i,0);
+       f1(a);
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    long long int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int n;
+        cin>>n;
+        vector<long long int>v(n-1);
+        long long int minimum=100000000;
+        for(long long int i=0;i<n-1;i++)
+        {
+        cin>>v[i];
+        minimum=min(v[i],minimum);
+        }
+        long long int f;
+        cin>>f;
+        if(minimum>f){
+        cout<<"impossible"<<"\n";
+        continue;
+        }
+        vector<long long int>position;
+                for(long long int i=0;i<n-1;i++)
+                {
+                    if(v[i]<=f)
+                    position.push_back(i);
+                }
+
+        long long int i=0;
+        wa array[position.size()];
+    while(i<position.size())
+    {
+       f2(v,position[i]);
+      
+       array[i].a=d;
+       array[i].b=position[i];
+       i++;
+       d=0;
+    }
+      sort(array,array+position.size(),f3);     
+
+       cout<<"possible"<<"\n";
+       cout<<array[0].b+1<<" "<<array[0].a+f<<"\n";
+    }
+    return 0;
+}
