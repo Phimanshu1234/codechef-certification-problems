@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int t,y,x,c,p,xp;
+    cin>>t;
+    while(t--)
+    {y=0;
+      c=0;
+       x=0;
+       p=1;
+        cin>>xp;
+        while(x<xp)
+        {
+           y+=p*p;
+           x=sqrt(y);
+           p=x;
+           p++;
+           c++;
+        }
+        cout<<c<<"\n";
+    }
+return 0;
+}
