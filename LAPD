@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+#define pb push_back
+#define mp make_pair
+#define M 1000000007
+int main()
+{
+     ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,a1,b1,c1,i,k,j,k1;
+    lld A1234[5005]={0};
+    for(b1=1;b1<=5000;b1++)
+    {
+      for(i=1;i<=b1;i++)
+        {
+            A1234[b1]=A1234[b1]+2*(((b1*b1)/i)-(i-1))-1;
+        }
+    }
+   cin>>t;
+    for(lld i1=0;i1<t;i1++)
+    {
+        cin>>a1>>b1>>c1;
+        a1--;
+        c1--;
+        if(a1*c1==0)
+        {
+            cout<<0<<"\n";
+        }
+        else
+        {
+        k=a1*c1;
+        lld Mi,Ma;
+        if(a1<c1)
+        {
+            Mi=a1;
+        }
+        else
+        {
+            Mi=c1;
+        }
+        if(a1>c1)
+        {
+            Ma=a1;
+        }
+        else
+        {
+            Ma=c1;
+        }
+        lld answer=0;
+        if(a1<c1)
+        {
+        for(i=1;i<=(lld)sqrt(a1)&&i<=b1;i++)
+        {
+              answer=(answer%M+(k-A1234[i])%M)%M;
+        }
+        }
+        else
+        {
+          for(i=1;i<=(lld)sqrt(c1)&&i<=b1;i++)
+        {
+              answer=(answer%M+(k-A1234[i])%M)%M;
+        }  
+        }
+        for(i;i<=b1;i++)
+        {
+            lld s1=(i*i)/2;
+           for(j=(i*i/Ma)+1;j<=s1&&j<=Mi;j++)
+           {
+               lld y=(i*i)/j;
+             answer=(answer%M+(Ma-y)%M)%M;
+           }
+           if(Mi>s1)
+           (answer=(answer%M+(Ma-1)%M*(Mi-s1)%M)%M);
+        }
+        cout<<answer%M<<"\n";
+        }
+    }
+    return 0;
+}
