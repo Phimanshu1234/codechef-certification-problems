@@ -1,0 +1,36 @@
+#include <iostream>
+#include<stack>
+using namespace std;
+int main()
+{
+    int t,count,i,l;
+    cin>>t;
+ while(t--)
+{count=0;
+    string s;
+    cin>>s;
+    stack<char>st;
+    l=s.length();
+    for(i=0;i<l;i++)
+    {
+        if(st.empty()&&s[i]=='>')
+        {
+            break;
+        }
+        if(s[i]=='<')
+        {
+            st.push('<');
+        }
+        else
+        {
+            st.pop();
+            if(st.empty())
+            {
+                count=i+1;
+            }
+        }
+    }
+      cout<<count<<endl;  
+}
+ return 0;
+}
