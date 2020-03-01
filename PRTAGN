@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int countSetBits(long long int n) 
+{ 
+long long int count = 0; 
+while (n) 
+{ 
+	count += n & 1; 
+	n >>= 1; 
+} 
+return count; 
+} 
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    long long int even,odd,q,t,i,x,r,k,k1,k2,j;
+   // vector<long long int>v1(200001,0);
+   // vector<long long int>v2;
+    cin>>t;
+    while(t--)
+    {even=0;
+      odd=0;
+        vector<long long int>v1(200001,0);
+        vector<long long int>v2;
+        cin>>q;
+        for(i=0;i<q;i++)
+        {
+            cin>>x;
+            if(v1[x]==0)
+            {
+                v1[x]=1;
+                k=v2.size();
+                for(j=0;j<k;j++)
+                {
+                    r=(x^v2[j]);
+                    if(v1[r]==0)
+                    {
+                        v1[r]=1;
+                        k1=countSetBits(r);
+                        if(k1%2==0)
+                        {
+                            even++;
+                        }
+                        else
+                        {
+                            odd++;
+                        }
+                        v2.push_back(r);
+                    }
+                }
+                k2=countSetBits(x);
+                if(k2%2==0)
+                {
+                    even++;
+                }
+                else
+                {
+                    odd++;
+                }
+                v2.push_back(x);
+            }
+            cout<<even<<" "<<odd<<endl;
+        }
+    }
+    return 0;
+}
