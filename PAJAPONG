@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int t,x,y,k,p;
+    cin>>t;
+    while(t--)
+    {
+        cin>>x>>y>>k;
+        p=x+y;
+        if(p%k==0)
+        {
+            if((p/k)%2==0)
+            {
+            printf("Chef\n");
+            }
+            else
+            {
+                printf("Paja\n");
+            }
+        }
+        else
+        {
+            if((p/k)%2==0)
+            {
+            printf("Chef\n");
+            }
+            else
+            {
+                printf("Paja\n");
+            }
+        }
+    }
+    return 0;
+}
