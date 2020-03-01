@@ -1,0 +1,30 @@
+#include <stdio.h>
+int main()
+{
+   long long int t,n,k,v,sum,i,r,a[100],p;
+   scanf("%lld",&t);
+   while(t--)
+   {sum=0;
+       scanf("%lld %lld %lld",&n,&k,&v);
+       for(i=0;i<n;i++)
+       {
+           scanf("%lld",&a[i]);
+       }
+       for(i=0;i<n;i++)
+       {
+           sum=sum+a[i];
+       }
+       p=(v*(n+k)-sum);
+        r=p/k;
+       if(p%k==0&&p>0)
+       {
+         printf("%lld\n",r);
+       }
+       else
+       {
+           printf("-1\n");
+       }
+   }
+   return 0;
+}
+
