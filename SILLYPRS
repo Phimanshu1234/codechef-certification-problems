@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int t,n,a[100001],b[100001],k,r,k1,r1,c[100001],d[100001],i,sum;
+    cin>>t;
+    while(t--)
+    {k=0;
+      k1=0;
+       sum=0;
+        cin>>n;
+        r=n-1;
+        r1=n-1;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        for(i=0;i<n;i++)
+        {
+            cin>>b[i];
+        }
+        for(i=0;i<n;i++)
+        {
+            if(a[i]%2==0)
+            {
+                c[k]=a[i];
+                k++;
+            }
+            else
+            {
+                c[r]=a[i];
+                r--;
+            }
+        }
+        for(i=0;i<n;i++)
+        {
+            if(b[i]%2==0)
+            {
+                d[k1]=b[i];
+                k1++;
+            }
+            else
+            {
+                d[r1]=b[i];
+                r1--;
+            }
+        }
+        for(i=0;i<n;i++)
+        {
+            sum=sum+(c[i]+d[i])/2;
+        }
+        cout<<sum<<endl;
+    }
+    return 0;
+}
