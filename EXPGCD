@@ -1,0 +1,83 @@
+
+#include<bits/stdc++.h>
+using namespace std; 
+#define lld long long int
+#define MAX 200001 
+long long phi[MAX], result[MAX]; 
+void computeTotient() 
+{ 
+    phi[1] = 1; 
+    for (lld i=2; i<MAX; i++) 
+    { 
+        if (!phi[i]) 
+        { 
+            phi[i]=i-1; 
+            for (lld j=(i<<1);j<MAX;j+=i) 
+            { 
+                if (!phi[j]) 
+                    phi[j] = j; 
+  
+                phi[j]=(phi[j]/i)*(i-1); 
+            } 
+        } 
+    } 
+} 
+void sumOfGcdPairs() 
+{
+    computeTotient(); 
+  
+    for (lld i=1; i<MAX; ++i) 
+    { 
+        for (lld j=2; i*j<MAX; ++j) 
+            result[i*j] += i*phi[j]; 
+    } 
+    for (lld i=2; i<MAX; i++) 
+        result[i] += result[i-1]; 
+} 
+lld gcd(lld a, lld b); 
+lld power(lld x, unsigned lld y, lld m); 
+lld modInverse(lld a, lld m) 
+{ 
+    lld s;
+	lld g = gcd(a,m); 
+	if (g!=1) 
+	    s=0;
+	else
+	{ 
+		 s=power(a,m-2,m); 
+	} 
+	return s;
+} 
+lld power(lld x, unsigned lld y, lld m) 
+{ 
+	if(y==0) 
+		return 1; 
+	lld p=power(x,y/2,m) % m; 
+	p = (p * p) % m; 
+
+	return (y%2==0)?p:(x * p) % m; 
+} 
+lld gcd(lld a1,lld b) 
+{ 
+	if (a1==0) 
+		return b; 
+	return gcd(b%a1,a1); 
+} 
+int main() 
+{ 
+    sumOfGcdPairs();
+    lld q,k,a,n,i;
+    cin>>q>>k;
+	lld m= 1000000007;
+	for(i=0;i<q;i++)
+	{
+	    cin>>n;
+	        a=(n*(n-1))/2;
+	        a=a%m;
+     	   k=modInverse(a,m);
+     	   result[n]=(result[n])%m;
+     	   //cout<<k<<"\n";
+     	   cout<<((result[n])*k)%m<<"\n";
+	}
+	return 0; 
+}
