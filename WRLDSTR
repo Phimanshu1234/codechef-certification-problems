@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+    lld t,i,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        lld k=0,k2=-1;
+        string s;
+        cin>>s;
+        if(s[0]=='a'||s[0]=='e'||s[0]=='i'||s[0]=='o'||s[0]=='u')
+        {
+            k=1;
+        }
+        for(i=1;i<n;i++)
+        {
+            if((s[i]=='a'||s[i]=='e'||s[i]=='i'||s[i]=='o'||s[i]=='u')&&(s[i]!=s[i-1]))
+            {
+                k++;
+            }
+            else
+            {
+                k2=max(k,k2);
+                k=0;
+                if((s[i]=='a'||s[i]=='e'||s[i]=='i'||s[i]=='o'||s[i]=='u'))
+                {
+                    k=1;
+                }
+            }
+        }
+        if(k>k2)
+        {
+            k2=k;
+        }
+        cout<<k2<<"\n";
+    }
+    return 0;
+}
