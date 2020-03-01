@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+#define M 1000000007
+lld fun(lld N,lld k,vector<lld>&v,vector<vector<lld>>&vec)
+{
+    if(k==-1)
+    {
+        return 1;
+    }
+    if(N==-1)
+    {
+        return 0;
+    }
+    if(vec[N][k]!=-1)
+    {
+        return vec[N][k];
+    }
+        lld a2=((v[N])%M*fun(N-1,k-1,v,vec)%M)%M;
+            lld a3=(fun(N-1,k,v,vec))%M;
+            vec[N][k]=(a2%M+a3%M)%M;
+            return a2%M+a3%M;
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld n,k,i,a1=0;
+    cin>>n>>k;
+    lld a[n+1];
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+      sort(a,a+n);
+    lld c=1;
+    vector<lld>v;
+    for(i=1;i<n;i++)
+    {
+        if(a[i-1]==a[i])
+        {
+            c++;
+        }
+        else
+        {
+            v.push_back(c);
+            c=1;
+        }
+    }
+    v.push_back(c);
+    vector<vector<lld>>vec(v.size(),vector<lld>(k,-1));
+    for(i=0;i<k&&i<=8001;i++)
+    {
+        a1=(a1%M+fun(v.size()-1,i,v,vec)%M)%M;
+    }
+    cout<<a1+1;
+    return 0;
+}
