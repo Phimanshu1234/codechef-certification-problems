@@ -1,0 +1,23 @@
+#include <stdio.h>
+int main() {
+    long long int t,a,total,n;
+    scanf("%lld",&t);
+    while(t--)
+    {
+      scanf("%lld",&a);
+      if(a%2==0)
+      {
+          n=(a/2)-1;
+          total=(n*(n+1))/2;
+          printf("%lld\n",total);
+      }
+      else
+      {
+          n=((a-1)/2)-1;
+          total=(n*(n+1))/2;
+          printf("%lld\n",total);
+      }
+    }
+	return 0;
+}
+
