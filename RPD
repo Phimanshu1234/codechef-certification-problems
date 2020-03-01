@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        long long int a[n+1],i,j,k,z,sum,l;
+        vector<long long int>v;
+        vector<long long int>v2;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        for(i=0;i<n;i++)
+        {
+            for(j=i+1;j<n;j++)
+            {
+                k=a[i]*a[j];
+                v.push_back(k);
+            }
+        }
+        for(i=0;i<v.size();i++)
+        {z=v[i];
+          sum=0;
+            while(z>0)
+            {
+                l=z%10;
+                sum+=l;
+                z=z/10;
+            }
+            v2.push_back(sum);
+        }
+        sort(v2.begin(),v2.end(),greater<long long int>());
+        cout<<v2[0]<<"\n";
+    }
+    return 0;
+}
