@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+     int t,i,count;
+    cin>>t;
+    while(t--)
+    {
+        i=0,count=0;
+        char s[51];
+        cin>>s;
+        while(s[i]!='\0')
+        {
+            if(s[i]!='.')
+            {
+                count++;
+            }
+            i++;
+        }
+        i=0;
+        int j=0;
+        int a[count];
+        while(s[i]!='\0')
+        {
+            if(s[i]!='.')
+            {
+                a[j]=i;
+                j++;
+            }
+            i++;
+        }
+        int k=0,l=0,m,n,flag=0;
+       for(j=0;j<count-1;j++)
+       {
+           k=a[j+1];
+           l=a[j];
+           m=s[k];
+           n=s[l];
+           if(a[j+1]-a[j]>(m+n)-96)
+           {
+               flag=0;
+           }
+           else
+           {
+               flag=1;
+               break;
+           }
+       }
+       if(flag==0)
+       {
+           cout<<"safe\n";
+       }
+       else
+       {
+           cout<<"unsafe\n";
+       }
+       flag=0;
+    }
+    return 0;
+    
+}
