@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int n,k,m,t,i,a[100000],b[100000],c[200000],d[100000];
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>k>>m;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        for( i=0;i<n;i++)
+        {
+            cin>>b[i];
+        }
+        for(i=0;i<k+m;i++)
+        {
+            cin>>c[i];
+        }
+        for(i=0;i<n;i++)
+        {
+            d[i]=a[i]-b[i];
+        }
+        sort(d,d+n,greater<long long int>());
+        sort(c,c+k+m,greater<long long int>());
+        long long int s=0,j=0;
+        for(i=0;i<k+m;i++)
+        {
+            if(d[j]>=c[i])
+            {
+                s=s+(d[j]-c[i]);
+                j++;
+            }
+        }
+        for(i=j;i<n;i++)
+        {
+            s=s+d[i];
+        }
+        cout<<s<<endl;
+    }
+    return 0;
+}
