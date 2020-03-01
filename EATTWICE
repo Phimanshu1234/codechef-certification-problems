@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+struct node
+{
+ lld a,b;   
+};
+bool fun(node s1,node s2)
+{
+    return s1.b>s2.b;
+}
+int main()
+{
+    lld t,n,m,k;
+  cin>>t;
+  while(t--)
+  {
+      cin>>n>>m;
+      node A[n];
+      for(lld i=0;i<n;i++)
+      {
+          cin>>A[i].a>>A[i].b;
+      }
+      sort(A,A+n,fun);
+      lld j=1;
+      for(lld i=0;i<n;i++)
+      {
+          if(A[i].a!=A[j].a)
+          {
+              k=A[0].b+A[j].b;
+             break;
+          }
+          else
+          {
+              j++;
+          }
+      }
+      cout<<k<<endl;
+  }
+  return 0;
+}
+
