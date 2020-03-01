@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+lld dow(lld y, lld m,lld d)
+{
+    lld t1[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+  y -= m < 3;
+  return (y+int(y/4)-int(y/100)+int(y/400)+t1[m-1]+d)%7;
+}
+void poonam(lld y1,lld y2)
+{
+    vector<lld>a;
+    lld count=0;
+    for(lld i=y1;i<400+y1;i++)
+    {
+        lld k=dow(i,2,1);
+              if(k==6)
+              {
+                  count++;
+              }
+              else if(k==0)
+              {
+                  if(!(i%400==0||(i%4==0&&i%100!=0)))
+                  {
+                     count++;
+                  }
+              }
+             a.push_back(count);
+    }
+     lld z=(y2-y1)/400;
+    lld r=z*count+a[(y2-y1)%400];
+    cout<<r<<"\n";
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld m1,m2,y1,y2;
+        cin>>m1>>y1;
+        cin>>m2>>y2;
+         if(m1>2)
+        {
+            y1=y1+1;
+        }
+        if(m2<2)
+        {
+            y2=y2-1;
+        }
+        if(y1>y2)
+        {
+            cout<<0<<"\n";
+        }
+        else
+        {
+         poonam(y1,y2);
+        }
+    }
+    return 0;
+}
