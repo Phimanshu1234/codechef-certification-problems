@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main()
+{
+    long long int t,n,a[100000],i,count;
+    scanf("%lld",&t);
+    while(t--)
+    {count=0;
+     scanf("%lld",&n);
+     for(i=0;i<n;i++)
+     {
+         scanf("%lld",&a[i]);
+         if(a[i]>=n/2)
+         {
+             count++;
+         }
+     }
+     printf("%lld\n",count);
+    }
+    return 0;
+}
+
