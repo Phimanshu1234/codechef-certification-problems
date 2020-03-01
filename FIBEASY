@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+     ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld n;
+        cin>>n;
+        lld a[61],a1=0,b=1,c,i;
+        a[0]=0;
+        a[1]=1;
+        for(i=2;i<60;i++)
+        {
+            c=a1%10+b%10;
+            a[i]=c%10;
+            a1=b;
+            b=c;
+        }
+        lld k1=2,p=1;
+        lld m=0;
+        for(i=0;i<n;i++)
+        {
+            if(k1>n)
+            {
+                break;
+            }
+            else
+            {
+                k1=k1*2;
+                m++;
+            }
+        }
+        for(i=1;i<=m;i++)
+        {
+            p=((p%60)*2)%60;
+        }
+        cout<<a[p-1]<<"\n";
+    }
+    return 0;
+}
