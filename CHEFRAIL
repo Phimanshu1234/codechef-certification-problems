@@ -1,0 +1,218 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+void sieveOfEratosthenes(lld N,lld s[]) 
+{ 
+    vector<bool>prime(N+1,false); 
+  
+    for (lld i=2;i<=N;i+=2) 
+        s[i]=2; 
+    for (lld i=3;i<=N;i+=2) 
+    { 
+        if (prime[i]==false) 
+        { 
+            s[i]=i; 
+            for (lld j=i;j*i<=N;j+=2) 
+            { 
+                if (prime[i*j]==false) 
+                { 
+                    prime[i*j]=true; 
+                    s[i*j]=i; 
+                } 
+            } 
+        } 
+    } 
+} 
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld s[100001];
+      sieveOfEratosthenes(100000,s); 
+     unordered_map<lld,vector<lld>>mp;
+    for(lld i=1;i<=100000;i++)
+    {
+      lld N=i;
+    lld curr=s[N]; 
+    lld cnt=1; 
+    while (N>1) 
+    { 
+         N/=s[N];
+        if (curr==s[N]) 
+        { 
+            cnt++; 
+            continue; 
+        } 
+         if(cnt%2!=0)
+         {
+             mp[i].push_back(curr);
+         }
+        curr=s[N]; 
+        cnt=1; 
+    }
+   /* if(cnt%2!=0)
+    {
+        mp[i].push_back(curr);
+    }*/
+    }
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld n,m,i,j,count=0,c1=0,c2=0;
+        cin>>n>>m;
+        lld a[n+1],b[m+1];
+        vector<lld>posx;
+        vector<lld>negx;
+        vector<lld>posy;
+        vector<lld>negy;
+        vector<lld>perposx;
+        vector<lld>perposy;
+        vector<lld>pernegx;
+        vector<lld>pernegy;
+        unordered_map<lld,lld>mp1;
+        unordered_map<lld,lld>mp2;
+        map<vector<lld>,vector<lld>>mp3;
+        map<vector<lld>,vector<lld>>mp4;
+        for(i=0;i<n;i++)
+        {
+            cin>>a[i];
+            if(a[i]==0)
+            {
+                c1++;
+            }
+            if(a[i]>0)
+            {
+                if(ceil(sqrt(a[i]))==floor(sqrt(a[i])))
+                {
+                    perposx.push_back(a[i]);
+                }
+                else
+                {
+                    mp3[mp[a[i]]].push_back(a[i]);
+                    posx.push_back(a[i]);
+                }
+            }
+            else if(a[i]<0)
+            {
+                negx.push_back(a[i]);
+            }
+             mp1[a[i]]=1;
+        }
+        for(i=0;i<m;i++)
+        {
+            cin>>b[i];
+            if(b[i]==0)
+            {
+                c2++;
+            }
+            mp2[b[i]]=1;
+        }
+        for(i=0;i<negx.size();i++)
+        {
+                if(ceil(sqrt(-negx[i]))==floor(sqrt(-negx[i])))
+                {
+                    pernegx.push_back(negx[i]);
+                }
+                else
+                {
+                    for( lld k=0;k<mp3[mp[-negx[i]]].size();k++)
+                    {
+                        if(mp2[sqrt((mp3[mp[-negx[i]]][k])*-negx[i])]==1)
+                        {
+                            count++;
+                        }
+                        if(mp2[-sqrt((mp3[mp[-negx[i]]][k])*-negx[i])]==1)
+                        {
+                            count++;
+                        }
+                    }
+                }
+        }
+         for(i=0;i<m;i++)
+         {
+            if(b[i]>0)
+            {
+                if(ceil(sqrt(b[i]))==floor(sqrt(b[i])))
+                {
+                    perposy.push_back(b[i]);
+                }
+                else
+                {
+                    mp4[mp[b[i]]].push_back(b[i]);
+                    posy.push_back(b[i]);
+                }
+            }
+            else if(b[i]<0)
+            {
+                negy.push_back(b[i]);
+            }
+        }
+        for(i=0;i<negy.size();i++)
+        {
+                if(ceil(sqrt(-negy[i]))==floor(sqrt(-negy[i])))
+                {
+                    pernegy.push_back(negy[i]);
+                }
+                else
+                {
+                    for( lld k=0;k<mp4[mp[-negy[i]]].size();k++)
+                    {
+                        if(mp1[sqrt((mp4[mp[-negy[i]]][k])*-negy[i])]==1)
+                        {
+                            count++;
+                        }
+                        if(mp1[(-sqrt((mp4[mp[-negy[i]]][k])*-negy[i]))]==1)
+                        {
+                            count++;
+                        }
+                    }
+                }
+        }
+        for(i=0;i<perposx.size();i++)
+        {
+            for(j=0;j<pernegx.size();j++)
+            {
+                lld z=sqrt(perposx[i]*-pernegx[j]);
+                if(mp2[z]==1)
+                {
+                    count++;
+                }
+                if(mp2[-z]==1)
+                {
+                    count++;
+                }
+            }
+        }
+        for(i=0;i<perposy.size();i++)
+        {
+            for(j=0;j<pernegy.size();j++)
+            {
+                lld z1=sqrt(perposy[i]*-pernegy[j]);
+                if(mp1[z1]==1)
+                {
+                    count++;
+                }
+                if(mp1[-z1]==1)
+                {
+                    count++;
+                }
+            }
+        }
+        if(c1>0&&c2==0)
+        {
+            count=count+(n-1)*m;
+        }
+        if(c2>0&&c1==0)
+        {
+            count=count+(m-1)*n;
+        }
+        if(c1>0&&c2>0)
+        {
+            count=count+n*m;
+        }
+        cout<<count<<"\n";
+    }
+    return 0;
+}
