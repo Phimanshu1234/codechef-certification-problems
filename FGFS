@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+struct him{
+    lld stime,etime,roomno;
+};
+bool fun(him s1,him s2)
+{
+    if(s1.roomno!=s2.roomno)
+    {
+        return s1.roomno<s2.roomno; 
+    }
+    return s1.etime<s2.etime;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        lld n,k;
+        cin>>n>>k;
+        if(n==0)
+        {
+            cout<<0<<endl;
+        }
+        else
+        {
+            him a[n];
+            for(lld i=0;i<n;i++)
+            {
+            cin>>a[i].stime>>a[i].etime>>a[i].roomno;
+            }
+            sort(a,a+n,fun);
+            lld j=0,result=1;
+            for(lld i=0;i<n;i++)
+            {
+                if(a[i].roomno!=a[j].roomno)
+                {
+                    result++;
+                    j=i;
+                }
+                else if(a[i].roomno==a[j].roomno&&a[i].stime>=a[j].etime)
+                {
+                    result++;
+                    j=i;
+                }
+            }
+            cout<<result<<endl;
+        }
+    }
+    return 0;
+}
+    
