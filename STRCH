@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include<string.h>
+int main() {
+	long long int t,n,sum,count,i;
+	char str[1000001],x;
+	scanf("%lld",&t);
+	while(t--)
+	{count=0;
+	    scanf("%lld",&n);
+	    scanf("%s %c",str,&x);
+	    sum=((n*(n+1))/2);
+	    for(i=0;i<n;i++)
+	    {
+	        if(str[i]!=x)
+	        {
+	            count++;
+	            sum=sum-count;
+	        }
+	        if(str[i]==x)
+	        {
+	            count=0;
+	        }
+	    }
+	    printf("%lld\n",sum);
+	}
+	return 0;
+}
