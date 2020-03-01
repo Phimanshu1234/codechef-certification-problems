@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+void printDivisors(lld n1,lld a2[]) 
+{ 
+    lld k1=0;
+    for (lld i=1;i<=sqrt(n1);i++) 
+    { 
+        if (n1%i==0) 
+        { 
+             
+            if (n1/i==i) 
+            {
+               k1+=a2[i];
+            }
+            else 
+            {
+                 k1+=a2[i]; 
+                 k1+=a2[n1/i];
+            }
+        } 
+    }
+    cout<<k1<<"\n";
+} 
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+    lld n,i,q,k;
+    cin>>n;
+    lld a[n+1],a1[1000001],a2[1000001]={0};
+    for(i=1;i<=n;i++)
+    {
+        cin>>a[i];
+    }
+    
+    a1[n]=a[n];
+    for(i=n-1;i>=1;i--)
+    {
+        a1[i]=__gcd(a[i],a1[i+1]);
+    }
+    
+    
+    for(i=1;i<=n;i++)
+    {
+        if(a[i]<=1000000)
+        {
+        a2[a[i]]++;
+        }
+      for(lld j=i+1;j<=n;j++)
+      {
+          a[i]=__gcd(a[i],a[j]);
+          if((a[i]==a1[j+1])&&a[i]<=1000000)
+          {
+              a2[a[i]]+=(n-j)+1;
+              break;
+          }
+          else if((a[i]!=a1[j+1])&&a[i]<=1000000)
+          {
+              a2[a[i]]++;
+          }
+      }
+    }
+
+   
+    cin>>q;
+    for(i=0;i<q;i++)
+    {
+        cin>>k;
+        printDivisors(k,a2);
+    }
+    
+    return 0;
+}
