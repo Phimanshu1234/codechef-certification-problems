@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+bool sumSquare(lld n) 
+{ 
+    unordered_map<lld, lld> s; 
+    for (lld i = 0; i * i <= n; ++i) { 
+  
+        s[i * i] = 1; 
+        if (s.find(n - i * i) != s.end())
+        { 
+            return true; 
+        } 
+    } 
+    return false; 
+}
+int main()
+{
+    lld t,n,k,a,b,i,c,d,r,MIMI;
+    cin>>t;
+    while(t--)
+    {MIMI=1e9;
+       cin>>a>>b;
+       i=a*a+b*b+1;
+       while(1)
+       {
+           if(sumSquare(i))
+           {
+               break;
+           }
+           else
+           {
+               i++;
+           }
+       }
+       for(c=0;c<=sqrt(i);c++)
+       {
+           
+               lld k=i-c*c;
+               if(floor(sqrt(k))==ceil(sqrt(k)))
+               {
+                   if(c+sqrt(k)<MIMI)
+                   {
+                      r=c;
+                       d=sqrt(k);
+                       MIMI=r+d;
+                   }
+               }
+          
+       }
+       cout<<r<<" "<<d;
+       cout<<"\n";
+    }
+    return 0;
+}
