@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+     ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,n,m,i,r;
+    cin>>t;
+    while(t--)
+    {r=3;
+        cin>>n>>m;
+        if(m<n-1||m>(n*(n+1))/2)
+        {
+            cout<<-1<<"\n";
+        }
+        else if(n==1&&m==0)
+        {
+            cout<<0<<"\n";
+        }
+        else if(m==1)
+        {
+            cout<<1<<"\n";
+        }
+        else if(m>=n-1&&m<=n+1)
+        {
+            cout<<2<<"\n";
+        }
+        else if(m>n+1&&m<=2*n)
+        {
+            cout<<3<<"\n";
+        }
+        else
+        {
+            if(n%2!=0)
+            {
+                m=m-2*n;
+                if(m%n==0)
+                {
+                    cout<<r+2*(m/n)<<"\n";
+                }
+                else
+                {
+                     if(m%n>n/2)
+                    {
+                    cout<<r+2*(m/n)+2<<"\n";
+                    }
+                    else
+                    {
+                        cout<<r+2*(m/n)+1<<"\n";
+                    }
+                }
+            }
+            else
+            {
+                m=m-2*n;
+                if(m%n==0)
+                {
+                    cout<<r+2*(m/n)<<"\n";
+                }
+                else
+                {
+                    if(m%n>n/2)
+                    {
+                    cout<<r+2*(m/n)+2<<"\n";
+                    }
+                    else
+                    {
+                        cout<<r+2*(m/n)+1<<"\n";
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
