@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,i,k=0;
+     priority_queue<lld>p;
+     priority_queue<lld,vector<lld>,greater<lld>>q;
+    cin>>t;
+    for(i=1;i<=t;i++)
+    {
+        lld x,y;
+        cin>>x;
+        if(x==1)
+        {k++;
+            cin>>y;
+            q.push(y);
+            if(q.size()>floor(k/3))
+            {
+                p.push(q.top());
+                q.pop();
+            }
+            else if((q.size()==floor(k/3))&&p.top()>q.top())
+            {
+                q.push(p.top());
+                p.push(q.top());
+                p.pop();
+                q.pop();
+            }
+        }
+        else
+        {
+            if(q.empty())
+            {
+                cout<<"No reviews yet"<<"\n";
+            }
+            else
+            {
+            cout<<q.top()<<"\n";
+            }
+        }
+    }
+    return 0;
+}
