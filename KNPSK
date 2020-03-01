@@ -1,0 +1,115 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long int n,w,c,i,weight=0;
+    cin>>n;
+    vector<int>one,two;
+    for(i=0;i<n;i++)
+    {
+        cin>>w>>c;
+        weight+=w;
+        if(w==1)
+        {
+            one.push_back(c);
+        }
+        else
+        {
+            two.push_back(c);
+        }
+    }
+    sort(one.begin(),one.end());
+    sort(two.begin(),two.end());
+    long long int a[weight];
+    vector<int>ONE=one,TWO=two;
+    long long int s=0;
+    for(i=2;i<=weight;i=i+2)
+    {
+        long long int c1=0,c2=0;
+        if(two.size()>=1)
+        {
+            c1=two.back();
+        }
+        long long int flag=1;
+        if(one.size()>=2)
+        {
+            c2=one.back();
+            c2=c2+one[one.size()-2];
+        }
+        else if(one.size()>=1)
+        {
+            c2=one.back();
+            flag=2;
+        }
+        if(c1>c2)
+        {
+            s+=c1;
+            two.pop_back();
+        }
+        else
+        {
+            s+=c2;
+            if(flag==1)
+            {
+            one.pop_back();
+            one.pop_back();
+            }
+            else
+            {
+                one.pop_back();
+            }
+        }
+        a[i]=s;
+    }
+    one=ONE,two=TWO;
+    s=0;
+    if(one.size()>=1)
+    {
+        s=one.back();
+        one.pop_back();
+    }
+    a[1]=s;
+     for(i=3;i<=weight;i=i+2)
+    {
+        long long int c1=0,c2=0;
+        if(two.size()>=1)
+        {
+            c1=two.back();
+        }
+        long long int flag=1;
+        if(one.size()>=2)
+        {
+            c2=one.back();
+            c2=c2+one[one.size()-2];
+        }
+        else if(one.size()>=1)
+        {
+            c2=one.back();
+            flag=2;
+        }
+        if(c1>c2)
+        {
+            s+=c1;
+            two.pop_back();
+        }
+        else
+        {
+            s+=c2;
+            if(flag==1)
+            {
+            one.pop_back();
+            one.pop_back();
+            }
+            else
+            {
+                one.pop_back();
+            }
+        }
+        a[i]=s;
+    }
+    for(long long int j=1;j<=weight;j++)
+    {
+        cout<<a[j]<<" ";
+    }
+    return 0;
+}
