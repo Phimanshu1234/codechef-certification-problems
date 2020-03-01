@@ -1,0 +1,36 @@
+#include<stdio.h>
+int main()
+{
+  int t,n,a,b,count,i;
+  
+  scanf("%d\n",&t);
+  while(t--)
+  {a=0;
+    b=0;
+     count=0;
+      scanf("%d\n",&n);
+      char A[n+1];
+          scanf("%s\n",A);//printf("%d\n",A[i]);
+     
+      for(i=0;i<n;i++)
+      {
+          if(A[i]=='1')
+          {
+              a++;
+          }
+          else
+          {
+              b++;
+          }
+          if(b>a)
+          {
+             count++;
+             a=a+1;
+             b=b-1;
+          }
+         // printf("%d %d",a,b);
+      }
+      printf("%d\n",count);
+  }
+  return 0;
+}
