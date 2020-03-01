@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int exponentMod(int A, int B, int C) 
+{
+    if (B == 0) 
+        return 1; 
+    long long int y; 
+    if (B % 2 == 0) { 
+        y = exponentMod(A, B / 2, C); 
+        y = (y * y) % C; 
+    } 
+    else { 
+        y = A % C; 
+        y = (y * exponentMod(A, B - 1, C) % C) % C; 
+    } 
+  
+    return (long long int)((y + C) % C); 
+} 
+int main()  
+{  
+   long long int A=2,B,n,C=1000000007,t;
+   cin>>t;
+   while(t--)
+   {
+       cin>>n;
+       B=n;
+   printf( "%lld\n", exponentMod(A, B, C)-1);  
+   }
+   return 0;  
+}
