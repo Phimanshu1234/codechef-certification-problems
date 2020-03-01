@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+lld find(lld k,lld a[])
+{
+    if(k==a[k])
+    {
+        return k;
+    }
+    else
+    {
+        return a[k]=find(a[k],a);
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t,i,n,q,x,y,z;
+    cin>>t; 
+    while(t--)
+    {
+        cin>>n;
+        lld a[n+1],s[n+1];
+        for(i=1;i<=n;i++)
+        {
+            a[i]=i;
+        }
+        for(i=1;i<=n;i++)
+        {
+            cin>>s[i];
+        }
+        cin>>q;
+        while(q--)
+        {
+           cin>>x;
+           if(x==0)
+           {
+               cin>>y>>z;
+               if(find(y,a)==find(z,a))
+               {
+                   cout<<"Invalid query!\n";
+               }
+               else
+               {
+                   if(find(y,a)!=find(z,a))
+                   {
+                   if(s[find(y,a)]>s[find(z,a)])
+                   {
+                       a[find(z,a)]=find(y,a);
+                   }
+                   else if(s[find(z,a)]>s[find(y,a)])
+                   {
+                       a[find(y,a)]=find(z,a);
+                   }
+                   }
+               }
+           }
+           else if(x==1)
+           {
+               cin>>y;
+               cout<<a[find(y,a)]<<"\n";
+           }
+        }
+    }
+    return 0;
+}
