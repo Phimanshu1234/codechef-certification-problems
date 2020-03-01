@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld n,k,i;
+      cin>>n>>k;
+      lld s=0;
+      lld x;
+      for(i=0;i<n;i++)
+      {
+          cin>>x;
+          s+=x;
+      }
+      cout<<s%k<<"\n";
+    }
+    return 0;
+}
