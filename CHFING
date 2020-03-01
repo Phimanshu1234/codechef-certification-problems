@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+   long long int t,n,k,r;
+   cin>>t;
+   while(t--)
+   {
+       cin>>n>>k;
+       if(n+k-1>=2*k)
+       {
+           cout<<(k-1)%1000000007<<endl;
+       }
+       else
+       {
+           r=k-n;
+           if(r%2==0)
+           {
+           cout<<((k-1)%1000000007+((r/2)%1000000007*(r+1)%1000000007)%1000000007)%1000000007<<endl;
+           }
+           else
+           {
+            cout<<((k-1)%1000000007+((r)%1000000007*((r+1)/2)%1000000007)%1000000007)%1000000007<<endl;
+           }
+       }
+   }
+   return 0;
+}
