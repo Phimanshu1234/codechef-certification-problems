@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define lld long long int
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    lld t;
+    cin>>t;
+    while(t--)
+    {
+        lld i,n,k1,k2,k3;
+        cin>>n>>k1>>k2>>k3;
+        lld a[n+1],b[21000];
+        a[0]=0;
+        priority_queue<lld,vector<lld>,greater<lld>>p;
+        for(i=1;i<=n;i++)
+        {
+            cin>>a[i];
+            a[i]+=a[i-1];
+        }
+        for(i=1;i<=n;i++)
+        {
+            for(lld j=i;j<=n;j++)
+            {
+               lld s=a[j]-a[i-1];
+               if(p.size()<k3)
+               {
+                   p.push(s);
+               }
+               else if(p.top()<s)
+               {
+                   p.pop();
+                   p.push(s);
+               }
+            }
+        }
+        i=0;
+        while(!p.empty())
+        {
+             b[i++]=p.top();
+            p.pop();
+        }
+        cout<<b[k3-k1]<<" "<<b[k3-k2]<<" "<<b[0];
+        cout<<"\n";
+    }
+    return 0;
+}
